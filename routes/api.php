@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TodosController;
@@ -15,10 +16,10 @@ use App\Http\Controllers\TodosController;
 |
 */
 
-//Route::middleware('auth:api')->group(function () {
-//    Route::get('/user', function (Request $request) {
-//        return $request->user();
-//    });
+Route::middleware('auth:api')->group(function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
 
     Route::get('/todos', [TodosController::class, 'index']);
     Route::post('/todos', [TodosController::class, 'store']);
@@ -27,8 +28,8 @@ use App\Http\Controllers\TodosController;
     Route::patch('/todosCheckAll', [TodosController::class, 'updateAll']);
     Route::delete('/todosDeleteCompleted', [TodosController::class, 'destroyCompleted']);
 
-//    Route::post('/logout', [AuthController::class, 'logout']);
-//});
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
 
-//Route::post('/login', [AuthController::class, 'login']);
-//Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
